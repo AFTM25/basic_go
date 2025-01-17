@@ -1,0 +1,227 @@
+Tipe Data pada go
+Integer : 
+int8, int16, int32, int64
+
+Tidak negatif:
+uint8, uint16, uint32, uint64
+
+Floating point :
+float32, float63, complex64, complex128
+
+Alias atau nama lain dari tipe data:
+byte -> uint8
+rune -> int32
+int -> minimal int32
+uint -> min uint32
+
+Tipe Data Boolean
+true, false
+
+Tipe Data String
+Menggunakan tanda kutip ganda (" ")
+
+Function untuk String
+len("string) = menghitung jumlah karakter di string
+"string"[number] = mengambil karakter pada posisi yang ditentukan berindeks, dapatnya dalam bentuk byte
+Bagaimana caranya agar bisa dapat karakter lagi? 
+Solusinya menggunakan variabel 
+contoh : 
+    str := "Aku suka kamu"
+    fmt.Println("Kalimat kedua : ", string(str[2]))
+
+==================================================================
+Variabel
+> Tempat untuk menyimpan data
+> Membuatnya : 
+    var nama_variable tipe_data
+> Bersifat menimpa
+
+Tipe Data Variabel
+> Saat kita membuat variabel, maka kita wajib menyebutkan tipe data variabel tersebut.
+> Namun jika kita langsung menginisialisasi data pada variabel nya, maka kita tidak wajib menyebutkan tipe data variabel nya.
+
+Kata kunci var
+> Di golang, kata kunci var saat membuat variabel tidak lah wajib
+> Asalkan saat membuat variabel kita langsung menginisialisasi datanya
+> Agar tidak perlu menggunakan keyword var, kita perlu menggunakan keyword := saat menginisialisasi data pada variabel tersebut
+
+Deklarasi Multiple Variabel
+> Membuat variable banyak sekaligus
+> Code yang dibuat akan lebih bagus dan mudah dibaca
+
+Catatan : Dalam membuat variabel di golang adalah ketika sudah membuat variabel harus digunakan secara langsung
+
+Constant 
+> Constant adalah variabel yang nilainya tidak bisa diubah lagi setelah pertama kali dibuat.
+> Pembuatan constant menggunakan keyword const bukan var
+> Langsung diinisialisasi datanya. 
+
+Deklarasi Multiple Constant
+Sama halnya dengan deklarasi multiple pada variabel, bedanya hanya pada keyword saja
+
+===============================================================================================
+
+Konversi Tipe Data 
+Contohnya : 
+    var nilai32 int32 = 32768
+    var nilai16 int16 = int16(nilai32)
+
+Type Declaration
+> adalah kemampuan membuat ulang tipe data baru dari tipe data yang sudah ada
+> Biasanya digunakan untuk membuat alias terhadap tpe data yang sudah ada, dengan tujuan agar lebih mudah dimengerti.
+> Caranya : 
+    type nama_var tipe_data
+    var var_baru nama_var = nilai
+
+============================================================================================================
+
+Operasi Matematika
+Penjumlahan (+)
+Pengurangan (-)
+Perkalian   (*)
+Pembagian   (/)
+Pengurangan (-)
+Sisa Pembagian (%)
+
+
+Augmented Assignment
++=
+-=
+*=
+/=
+%=
+
+Unary Operator
+++ -> a = a + 1
+-- -> a = a - 1
+-  -> Negative
++  -> Positive
+|  -> Boolean Kebalikan untuk Boolean
+
+
+============================================================================================================
+
+Operasi Perbandingan
+> Untuk membandingkan dua buah data
+> Operasi yang menghasilkan nilai boolean (benar atau salah)
+> Jika benar maka true
+> Jika salah maka false
+
+Operator Perbandingan
+>   (lebih dari)
+<   (kurang dari)
+>=  (lebih dari sama dengan)
+<=  (kurang dari sama dengan)
+==  (sama dengan)
+!=  (tidak sama dengan)
+
+===================================================================
+Operasi Boolean
+&&  (Dan)
+||  (Or)
+!   (kebalikan)
+
+===================================================================
+Tipe Data Array
+> Array adalah tipe data yang berisikan kumpulan data dengan tipe yang sama
+> Saat membuat array, kita perlu menentukan jumlah data yang bisa ditampung oleh array tersebut
+> Daya tampung  array tidak bisa bertambah setelah array dibuat
+
+Indeks di Array
+Index 0 elemen pertama
+Index 1 elemen kedua
+Index 2 elemen ketiga
+dan seterusnya
+
+> Cara membuatnya 
+    var nama[3] string
+
+> Cara mengisi nya
+    nama[0] = nilai1
+    nama[1] = nilai2
+    nama[2] = nilai3
+
+Membuat Array Langsung
+> Di Go-lang kita juga bisa membuat array secara langsung saat deklarasi variabel
+> Caranya : 
+    var value = [3]int{90,11,21}
+
+Function pada Array
+len(array) -> mendapatkan panjang array
+array[index] -> mendapatkan data di posisi index
+array[index] = value -> mengubah nilai array
+
+=========================================================================================
+Tipe Data Slice
+> Potongan dari data array
+> Ukuran slice bisa berubah
+> slice dan array selalu terkoneksi, dimana slice adalah data yang mengakses sebagian atau seluruh data di array
+
+Detail tipe data slice
+> Tipe data slice memiliki 3 data, yaitu pointer, length dan capacity
+> Pointer adalah penunjuk data pertama di array pada slice
+> Length adalah panjang dari slice, dan
+> Capacity adalah kapasitas dari slice, dimana length tidak boleh lebih dari capacity
+
+Membuat Slice/irisan dari array
+array[low:high]     -> membuat slice dari array dimulai index low sampai index sebelum high
+array[low:]         -> Membuat slice dari array dimana index low sampai index akhir di array
+array[:high]        -> membuat slice dari array dimulai dari index 0 sampai index sebelum high
+array[:]            -> membuat slice dari array dimulai dari index 0 sampai index akhir di array
+
+Function Slice
+len(slice)          -> mendapatkan panjang pada si slice nya bukan panjang pada array
+rumus len(slice) = indeks akhir - indeks awal
+
+cap(slice)          -> mendapatkan kapasitas dari pointer
+
+
+append(slice, data) -> membuat slice baru dengan menambah data ke posisi terakhir slice, jika kapasitas sudah penuh, maka akan membuat array baru dan array baru tsb disembunyikan oleh slice
+Contoh pembuatan : 
+    dataAngka := []int{1,2,3,4}
+    dataAngka = append(dataAngka, 5,6,7,8,9,10)
+
+make([]TypeData, length, capacity)  -> membuat slice baru
+    TypeData = tipe data
+    length = panjang indeks 
+    capacity = maks panjang indeks
+
+copy(destination, source)   -> menyalin slice dari source ke destination....
+
+Hati-hati saat membuat array
+> Jika saat ingin membuat array perhatikan dari kedua ini:
+    untukArray := [...]int{123,2,10,11}
+    untukSlice := []int{10, 88, 12}
+
+Pilih array atau slice, kebanyakan pake slice
+
+============================================================
+Tipe Data Map
+> Pada array atau slice, untuk mengakses data kita menggunakan indeks number dimulai dari 0.
+> Map adalah tipe data lain yang berisikan kumpulan data yang sama, namun kita juga bisa menentukan jenis tipe data indeks yang akan kita gunakan.
+> Sederhananya, Map adalah tipe data kumpulan peer berupa key-value(dimana key adalah indeks dan value adalah nilai itu sendiri), dimana key itu bersifat unik, tidak boleh sama.
+> Berbeda dengan array dan slice, jumlah data ynag dimasukkan ke dalam Map boleh sebanyak-banyaknya, asalkan key nya berbeda, jika kita menggunakan key yang sama, maka secara otomatis data sebelumnya akan diganti dengan data yang baru artinya operasinya itu ditimpa, dihapus yang lama gunakan yang baru.
+Contoh Sintaks :
+//cara 1
+    var person map[typeDataKey]typeDataValue = map[typeDataKey]typeDataValue{}
+
+// cara 2
+    person := map[typeDataKey]typeDataValue{}
+
+// Mengakses nya 
+    person[key]
+
+Function pada map
+len(map)                            -> untuk mendapatkan jumlah data di map
+map[key]                            -> Mengambil data di map dengan key
+map[key] = value                    -> Mengubah data di map dengan key
+make(map[TypeDataKey]TypeValue)     -> Membuat map baru
+delete(map, key)                    -> Menghapus data di map dengan key
+
+====================================================================
+
+If Expression
+> Mengontrol eksekusi program berdasarkan kondisi tertentu.
+> Kondisi berdasarkan dengan boolean, variabel, operasi perbandingan, logika
+> Untuk pembuatan kondisi pada if tidak menggunakan simbol kurung (parenthese).
+
